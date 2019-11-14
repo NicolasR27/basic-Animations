@@ -19,9 +19,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
          configureLabel()
+         configureButtons()
         
     }
-    func configureLabel() {
+    private func configureLabel() {
         label = UILabel(frame:CGRect(x: 0, y: 0, width: 200, height: 200))
         label.widthAnchor.constraint(equalTo: label.heightAnchor).isActive = false
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -33,14 +34,33 @@ class ViewController: UIViewController {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize:96)
         
+        
+}
+    
+    
+    private func configureButtons() {
+        let rotateButton = UIButton(type: .system)
+        rotateButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rotateButton)
+        rotateButton.setTitle("", for: .normal)
+        rotateButton.addTarget(self, action: #selector(rotateButtonTapped), for:.touchUpInside)
+        
+        
     }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // this is ensures the label is centered on the screen
         label.center = view.center
         
     }
-
-
+    // MARK: - Actions
+    
+    @objc func rotateButtonTapped(sender:UIButton) {
+        UIView.animate(withDuration: 2.0) {
+            self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
+    }
 }
 
