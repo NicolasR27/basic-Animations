@@ -15,11 +15,11 @@ class ViewController: UIViewController {
     
     //MARK: - View Life Cycle
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-         configureLabel()
-         configureButtons()
+        configureLabel()
+        configureButtons()
         
     }
     private func configureLabel() {
@@ -30,24 +30,41 @@ class ViewController: UIViewController {
         
         label.layer.borderWidth = 2
         label.layer.cornerRadius = 12
+        
         label.text = "🛹"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize:96)
         
         
-}
+        
+    }
     
     
     private func configureButtons() {
         let rotateButton = UIButton(type: .system)
         rotateButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(rotateButton)
-        rotateButton.setTitle("", for: .normal)
+        rotateButton.setTitle("Rotate", for: .normal)
         rotateButton.addTarget(self, action: #selector(rotateButtonTapped), for:.touchUpInside)
         
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(stackView)
         
-    }
-    
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        
+        stackView.addArrangedSubview(rotateButton)
+        
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
+        
+        
+        
+        }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -58,9 +75,15 @@ class ViewController: UIViewController {
     // MARK: - Actions
     
     @objc func rotateButtonTapped(sender:UIButton) {
+        label.center = view.center
         UIView.animate(withDuration: 2.0) {
-            self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+            self.label.transform = CGAffineTransform(rotationAngle: CGFloat.pi/4)
+            
+            
+            
+            
         }
     }
 }
+
 
