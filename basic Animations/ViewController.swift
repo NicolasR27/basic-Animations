@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  basic Animations
-//
-//  Created by Nicolas Rios on 11/14/19.
-//  Copyright © 2019 Nicolas Rios. All rights reserved.
-//
 
 import UIKit
 
